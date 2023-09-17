@@ -21,14 +21,14 @@ export const App = () => {
   const [modalImageAlt, setModalImageAlt] = useState('');
 
   const handleSubmit = inputValue => {
-    setInputValue('');
+    setInputValue(inputValue);
     setItems([]);
     setPage(1);
     setTotalItems(0);
   };
 
   const hendlerLoadMore = () => {
-    setPage(prevState => prevState.page + 1);
+    setPage(prevPage => prevPage + 1);
   };
 
   const handleClick = (src, alt) => {
@@ -42,7 +42,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    if (!inputValue || !page) return;
+    if (!inputValue) return;
     setLoading(true);
 
     fetchImages(inputValue, page)
@@ -51,7 +51,7 @@ export const App = () => {
           toast.error(`OOOps... no picture requested "${inputValue}"`);
           return;
         } else {
-          setItems(prevState => [...prevState.items, ...hits]);
+          setItems(prevState => [...prevState, ...hits]);
           setTotalItems(totalHits);
         }
       })
