@@ -39,6 +39,8 @@ export const App = () => {
 
   const closeModal = () => {
     setShowModal(false);
+    setModalImageSrc('');
+    setModalImageAlt('');
   };
 
   useEffect(() => {
